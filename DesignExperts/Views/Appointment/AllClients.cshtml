@@ -70,20 +70,19 @@
 </div>
 
 <div id="form-add-client" class="popup-content">
-    <form>
         <br />
         <div class="row">
             <div class="input-group col-md-6">
                 <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
                 <div class="form-group">
-                    <input type="text" asp-for="Name" class="form-control" placeholder="Name">
+                    <input type="text" id="name" asp-for="Name" class="form-control" placeholder="Name">
                     <i class="form-group__bar"></i>
                 </div>
             </div>
             <div class="input-group col-md-6">
                 <span class="input-group-addon"><i class="zmdi zmdi-card"></i></span>
                 <div class="form-group">
-                    <input type="text" asp-for="Cnic" class="form-control input-mask" data-mask="00000-0000000-0" placeholder="e.g 00000-0000000-0" autocomplete="off" maxlength="13">
+                    <input type="text"id="cnic" asp-for="Cnic" class="form-control input-mask" data-mask="00000-0000000-0" placeholder="e.g 00000-0000000-0" autocomplete="off" maxlength="13">
                     <i class="form-group__bar"></i>
                 </div>
             </div>
@@ -93,14 +92,14 @@
             <div class="input-group col-md-6">
                 <span class="input-group-addon"><i class="zmdi zmdi-smartphone"></i></span>
                 <div class="form-group">
-                    <input type="text" asp-for="Mobile" class="form-control input-mask" data-mask="0000-0000000" placeholder="e.g 0300-0000000" autocomplete="off" maxlength="11">
+                    <input type="text" id="mobile" asp-for="Mobile" class="form-control input-mask" data-mask="0000-0000000" placeholder="e.g 0300-0000000" autocomplete="off" maxlength="11">
                     <i class="form-group__bar"></i>
                 </div>
             </div>
             <div class="input-group col-md-6">
                 <span class="input-group-addon"><i class="zmdi zmdi-phone"></i></span>
                 <div class="form-group">
-                    <input type="text" asp-for="Phone" class="form-control input-mask" data-mask="000-0000000" placeholder="e.g 056-0000000" autocomplete="off" maxlength="10">
+                    <input type="text" id="phone" asp-for="Phone" class="form-control input-mask" data-mask="000-0000000" placeholder="e.g 056-0000000" autocomplete="off" maxlength="10">
                     <i class="form-group__bar"></i>
                 </div>
             </div>
@@ -110,21 +109,20 @@
             <div class="input-group col-md-6">
                 <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
                 <div class="form-group">
-                    <input type="email" asp-for="Email" class="form-control" placeholder="e.g username@abc.com" maxlength="100">
+                    <input type="email" id="email" asp-for="Email" class="form-control" placeholder="e.g username@abc.com" maxlength="100">
                     <i class="form-group__bar"></i>
                 </div>
             </div>
             <div class="input-group col-md-6">
                 <span class="input-group-addon"><i class="zmdi zmdi-my-location"></i></span>
                 <div class="form-group">
-                    <input type="text" asp-for="Address" class="form-control" placeholder="e.g Block No.x, Street #x, City" maxlength="250">
+                    <input type="text" id="address" asp-for="Address" class="form-control" placeholder="e.g Block No.x, Street #x, City" maxlength="250">
                     <i class="form-group__bar"></i>
                 </div>
             </div>
         </div>
         <br />
         <button id="btn-save-client" class="btn btn-dark btn--icon-text" style="float:right"><i class="zmdi zmdi-save"></i> Save</button>
-    </form>
 </div>
 
 @section Scripts{
@@ -140,8 +138,26 @@
             });
 
             $("#btn-save-client").on("click", function (event) {
-                var clientObj = {};
-                clientObj.Name
+                var clientObj = {
+                    Name: $("#name").val(),
+                    Cnic: $("#cnic").val(),
+                    Mobile: $("#mobile").val(),
+                    Phone: $("#phone").val(),
+                    Email: $("#email").val(),
+                    Address: $("#address").val()
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "/Appointment/AddClient",
+                    data: clientObj,
+                    dataType: "Json",
+                    success: function (result) {
+                        alert("Successfully added");
+                    },
+                    error: function (result) {
+                        alert("Some Error occoured");
+                    }
+                });
             });
         });
     </script>
