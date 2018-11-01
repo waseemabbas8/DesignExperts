@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using DesignExperts.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using DesignExperts.Models;
 
 namespace DesignExperts
 {
@@ -37,6 +38,9 @@ namespace DesignExperts
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<dbDesignExpertsContext>(options =>
+                            options.UseSqlServer(
+                                Configuration.GetConnectionString("DesignExpertsCS")));
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
