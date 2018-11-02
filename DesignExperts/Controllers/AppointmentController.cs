@@ -18,7 +18,15 @@ namespace DesignExperts.Controllers
 
         public IActionResult AllClients()
         {
-            return View();
+            IList<Client> clients = ORM.Client.ToList<Client>();
+            return View(clients);
+        }
+
+        public string GetAllClients()
+        {
+            string result = "";
+            IList<Client> clients = ORM.Client.ToList<Client>();
+            return result;
         }
 
         [HttpPost]

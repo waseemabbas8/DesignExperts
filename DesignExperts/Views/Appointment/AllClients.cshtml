@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "AllClients";
 }
-@model Client;
+@model IEnumerable<Client>;
 
 
 <header class="content__title">
@@ -32,35 +32,32 @@
     </style>
 </header>
 
+<!--Data Table to show/search saved clients-->
 <div class="card">
     <div class="card-body">
         <h4 class="card-title">Search Clients</h4>
-
         <div class="table-responsive">
             <table id="data-table" class="table">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Phone Number</th>
-                        <th>Project Status</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
+                        <th>CNIC</th>
+                        <th>Appointment</th>
+                        <th>Project</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @for (int i = 0; i < 20; i++)
+                    @foreach (Client client in Model)
                     {
-                        Random random = new Random();
-                        String nubmer = "0333-" + random.Next(3000000, 9900000);
-
                         <tr>
-                            <td>@random.Next(20000, 99000)</td>
-                            <td>System Architect</td>
-                            <td>@nubmer</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                            <td>@random.Next(10000, 90000)</td>
+                            <td>@client.Id</td>
+                            <td>@client.Name</td>
+                            <td>@client.Cnic</td>
+                            <td>Appointment</td>
+                            <td>Project</td>
+                            <td>Actions</td>
                         </tr>
                     }
                 </tbody>
@@ -69,65 +66,77 @@
     </div>
 </div>
 
+<!--Pop Up to add new client-->
 <div id="form-add-client" class="popup-content">
-        <br />
-        <div class="row">
-            <div class="input-group col-md-6">
-                <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
-                <div class="form-group">
-                    <input type="text" id="name" asp-for="Name" class="form-control" placeholder="Name">
-                    <i class="form-group__bar"></i>
-                </div>
-            </div>
-            <div class="input-group col-md-6">
-                <span class="input-group-addon"><i class="zmdi zmdi-card"></i></span>
-                <div class="form-group">
-                    <input type="text"id="cnic" asp-for="Cnic" class="form-control input-mask" data-mask="00000-0000000-0" placeholder="e.g 00000-0000000-0" autocomplete="off" maxlength="13">
-                    <i class="form-group__bar"></i>
-                </div>
+    <br />
+    <div class="row">
+        <div class="input-group col-md-6">
+            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+            <div class="form-group">
+                <input type="text" id="name" class="form-control" placeholder="Name">
+                <i class="form-group__bar"></i>
             </div>
         </div>
-        <br />
-        <div class="row">
-            <div class="input-group col-md-6">
-                <span class="input-group-addon"><i class="zmdi zmdi-smartphone"></i></span>
-                <div class="form-group">
-                    <input type="text" id="mobile" asp-for="Mobile" class="form-control input-mask" data-mask="0000-0000000" placeholder="e.g 0300-0000000" autocomplete="off" maxlength="11">
-                    <i class="form-group__bar"></i>
-                </div>
-            </div>
-            <div class="input-group col-md-6">
-                <span class="input-group-addon"><i class="zmdi zmdi-phone"></i></span>
-                <div class="form-group">
-                    <input type="text" id="phone" asp-for="Phone" class="form-control input-mask" data-mask="000-0000000" placeholder="e.g 056-0000000" autocomplete="off" maxlength="10">
-                    <i class="form-group__bar"></i>
-                </div>
+        <div class="input-group col-md-6">
+            <span class="input-group-addon"><i class="zmdi zmdi-card"></i></span>
+            <div class="form-group">
+                <input type="text" id="cnic" class="form-control input-mask" data-mask="00000-0000000-0" placeholder="e.g 00000-0000000-0" autocomplete="off" maxlength="13">
+                <i class="form-group__bar"></i>
             </div>
         </div>
-        <br />
-        <div class="row">
-            <div class="input-group col-md-6">
-                <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
-                <div class="form-group">
-                    <input type="email" id="email" asp-for="Email" class="form-control" placeholder="e.g username@abc.com" maxlength="100">
-                    <i class="form-group__bar"></i>
-                </div>
-            </div>
-            <div class="input-group col-md-6">
-                <span class="input-group-addon"><i class="zmdi zmdi-my-location"></i></span>
-                <div class="form-group">
-                    <input type="text" id="address" asp-for="Address" class="form-control" placeholder="e.g Block No.x, Street #x, City" maxlength="250">
-                    <i class="form-group__bar"></i>
-                </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="input-group col-md-6">
+            <span class="input-group-addon"><i class="zmdi zmdi-smartphone"></i></span>
+            <div class="form-group">
+                <input type="text" id="mobile" class="form-control input-mask" data-mask="0000-0000000" placeholder="e.g 0300-0000000" autocomplete="off" maxlength="11">
+                <i class="form-group__bar"></i>
             </div>
         </div>
-        <br />
-        <button id="btn-save-client" class="btn btn-dark btn--icon-text" style="float:right"><i class="zmdi zmdi-save"></i> Save</button>
+        <div class="input-group col-md-6">
+            <span class="input-group-addon"><i class="zmdi zmdi-phone"></i></span>
+            <div class="form-group">
+                <input type="text" id="phone" class="form-control input-mask" data-mask="000-0000000" placeholder="e.g 056-0000000" autocomplete="off" maxlength="10">
+                <i class="form-group__bar"></i>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="input-group col-md-6">
+            <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
+            <div class="form-group">
+                <input type="email" id="email" class="form-control" placeholder="e.g username@abc.com" maxlength="100">
+                <i class="form-group__bar"></i>
+            </div>
+        </div>
+        <div class="input-group col-md-6">
+            <span class="input-group-addon"><i class="zmdi zmdi-my-location"></i></span>
+            <div class="form-group">
+                <input type="text" id="address" class="form-control" placeholder="e.g Block No.x, Street #x, City" maxlength="250">
+                <i class="form-group__bar"></i>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="input-group col-md-6">
+            <span class="input-group-addon"><i class="zmdi zmdi-male-female"></i></span>
+            <div class="form-group">
+                <input type="text" id="email" class="form-control" placeholder="e.g username@abc.com" maxlength="100">
+                <i class="form-group__bar"></i>
+            </div>
+        </div>
+    </div>
+    <br />
+    <button id="btn-save-client" class="btn btn-dark btn--icon-text" style="float:right"><i class="zmdi zmdi-save"></i> Save</button>
 </div>
 
 @section Scripts{
     <script>
         $(function () {
+
             $("#form-add-client").PopupWindow({
                 title: "Add New Client",
                 autoOpen: false
