@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DesignExperts.Models;
+using DesignExperts.Resources;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DesignExperts.Controllers
@@ -18,7 +19,15 @@ namespace DesignExperts.Controllers
 
         public IActionResult AllClients()
         {
-            IList<Client> clients = ORM.Client.ToList<Client>();
+            IList<Client> clients=null;
+            try
+            {
+                clients = ORM.Client.ToList<Client>();
+            }
+            catch
+            {
+                ViewBag.Message = Constants.DB_CONNECTION_ERROR;
+            }
             return View(clients);
         }
 
@@ -29,20 +38,43 @@ namespace DesignExperts.Controllers
             return result;
         }
 
+        [HttpGet]
+        public IActionResult AddClient()
+        {
+            return View();
+        }
+
         [HttpPost]
-        public IActionResult AddClient(Client _Client)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddClient(Client client)
         {
             if (ModelState.IsValid)
             {
-                ORM.Client.Add(_Client);
-                ORM.SaveChanges();
-                return Json("Done");
+                try
+                {
+                    client.CreatedDate = DateTime.Now;
+                    client.CreatedBy = "WASEEM ABBAS";
+                    ORM.Client.Add(client);
+                    await ORM.SaveChangesAsync();
+                    return Json(Constants.DB_CRUD_SUCCESS);
+                }
+                catch
+                {
+                    return Json(Constants.DB_CRUD_ERROR);
+                }
             }
-            else
-            {
-                return Json("Error");
-            }
-           
+
+            return Json(Constants.DB_CRUD_ERROR);
+        }
+
+        public IActionResult CreateAppointment()
+        {
+            return View();
+        }
+
+        public IActionResult AllAppointments()
+        {
+            return View();
         }
     }
 }

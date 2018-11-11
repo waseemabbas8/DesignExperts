@@ -1,0 +1,147 @@
+﻿<head>
+    <link rel="stylesheet" href="~/Theme/vendors/bower_components/sweetalert2/dist/sweetalert2.min.css">
+</head>
+
+@{
+    ViewData["Title"] = "AddClient";
+}
+@model Client;
+@using DesignExperts.Resources;
+
+<div class="content__inner content__inner--sm">
+    <!--header section-->
+    <header class="content__title">
+        <h1>Manage Clients</h1>
+
+        <div class="actions">
+            <a href="" class="actions__item zmdi zmdi-trending-up"></a>
+            <a href="" class="actions__item zmdi zmdi-check-all"></a>
+
+            <div class="dropdown actions__item">
+                <i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a asp-controller="Appointment" asp-action="AllClients" class="dropdown-item">View All</a>
+                    <a href="" class="dropdown-item">Refresh</a>
+                    <a href="" class="dropdown-item">Settings</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--Add client form-->
+    <div class="card new-contact">
+        <div class="new-contact__header">
+            <a href="" class="zmdi zmdi-camera new-contact__upload"></a>
+
+            <img src="~/Theme/demo/img/contacts/user_empty.png" class="new-contact__img" alt="">
+        </div>
+
+        <div class="card-body">
+            @Html.AntiForgeryToken()
+            <form id="frm-clients" asp-controller="Appointment" asp-action="AddClient" 
+                data-ajax="true" data-ajax-method="POST" data-ajax-loading="onLoading" data-ajax-success="onSuccess" data-ajax-failure="onFailure">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Client Name"><i class="zmdi zmdi-account"></i></span>
+                            <div class="form-group">
+                                <input type="text" asp-for="Name" class="form-control form-control-lg" placeholder="Name" maxlength="100">
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Client CNIC"><i class="zmdi zmdi-card"></i></span>
+                            <div class="form-group">
+                                <input type="text" asp-for="Cnic" class="form-control form-control-lg input-mask" data-mask="00000-0000000-0" placeholder="eg: 30000-0000000-0" autocomplete="off" maxlength="13">
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                        <span asp-validation-for="Cnic" class="text-danger"></span>
+                    </div>
+                </div>
+                <br /><br />
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Landline Number"><i class="zmdi zmdi-phone"></i></span>
+                            <div class="form-group">
+                                <input type="text" asp-for="Phone" class="form-control form-control-lg input-mask" data-mask="000-0000000" placeholder="eg: 050-0000000" autocomplete="off" maxlength="10">
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Mobile Number"><i class="zmdi zmdi-smartphone-android"></i></span>
+                            <div class="form-group">
+                                <input type="text" asp-for="Mobile" class="form-control form-control-lg input-mask" data-mask="0000-0000000" placeholder="eg: 0300-0000000" autocomplete="off" maxlength="11">
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                        <span asp-validation-for="Mobile" class="text-danger"></span>
+                    </div>
+                </div>
+                <br /><br />
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Client Email"><i class="zmdi zmdi-email"></i></span>
+                            <div class="form-group">
+                                <input type="email" asp-for="Email" class="form-control form-control-lg" placeholder="e.g abc@example.com" maxlength="100">
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Gender"><i class="zmdi zmdi-male-female"></i></span>
+                            <div class="form-group">
+                                <select class="select2  select2-hidden-accessible form-control form-control-lg" aria-hidden="true">
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br /><br />
+                <div class="row">
+                    <div class="input-group input-group-lg col-md-12">
+                        <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Residance Address"><i class="zmdi zmdi-my-location"></i></span>
+                        <div class="form-group">
+                            <input type="text" asp-for="Address" class="form-control form-control-lg" placeholder="e.g Mohallah ABC, Block # x, Street # x, City" maxlength="200">
+                            <i class="form-group__bar"></i>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="mt-5 text-center">
+                    <button id="btn-save" type="submit" class="btn btn-light btn--icon-text"><i class="zmdi zmdi-save"></i> Save</button>
+                    <button type="button" class="btn btn-light btn--icon-text"><i class="zmdi zmdi-close"></i> Clear</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts{
+    <script src="~/Theme/vendors/bower_components/sweetalert2/dist/sweetalert2.min.js"></script>
+
+    <script>
+        function onLoading(response) {
+
+        }
+        onBegin = function (res) {
+            $('#btn-save').attr('disabled', true);
+        }
+        onSuccess = function (res) {
+            $('#btn-save').attr('disabled', false);
+        }
+    </script>
+
+}

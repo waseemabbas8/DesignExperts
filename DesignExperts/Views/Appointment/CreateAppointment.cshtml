@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewData["Title"] = "CreateClient";
+}
+
+<div class="content__inner">
+    <!--header section-->
+    <header class="content__title">
+        <h1>Manage Appointments</h1>
+
+        <div class="actions">
+            <a href="" class="actions__item zmdi zmdi-trending-up"></a>
+            <a href="" class="actions__item zmdi zmdi-check-all"></a>
+
+            <div class="dropdown actions__item">
+                <i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a asp-controller="Appointment" asp-action="AllAppointments" class="dropdown-item">View All</a>
+                    <a href="" class="dropdown-item">Refresh</a>
+                    <a href="" class="dropdown-item">Settings</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+</div>
+

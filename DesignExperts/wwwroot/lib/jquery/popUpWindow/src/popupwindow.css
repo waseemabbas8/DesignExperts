@@ -17,6 +17,11 @@ PopupWindow - The ultimate popup/dialog/modal jQuery plugin
 .popupwindow_container{
     z-index:200;
 }
+
+#form-add-client .row {
+    margin: 0;
+}
+
 /* Window */
 .popupwindow {
     color: #f0f0f0;

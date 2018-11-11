@@ -1,0 +1,8 @@
+[
+  {
+    "outputFileName": "wwwroot/Theme/vendors/bower_components/jquery.unobtrusive/jquery.unobtrusive-ajax.min.js",
+    "inputFiles": [
+      "wwwroot/Theme/vendors/bower_components/jquery.unobtrusive/jquery.unobtrusive-ajax.js"
+    ]
+  }
+]
