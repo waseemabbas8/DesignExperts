@@ -31,11 +31,9 @@ namespace DesignExperts.Controllers
             return View(clients);
         }
 
-        public string GetAllClients()
+        public int GetClientsCount()
         {
-            string result = "";
-            IList<Client> clients = ORM.Client.ToList<Client>();
-            return result;
+            return ORM.Client.ToList<Client>().Count;
         }
 
         [HttpGet]
