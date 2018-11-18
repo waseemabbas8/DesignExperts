@@ -46,15 +46,38 @@ namespace DesignExperts.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddClient(Client client)
+        public Task<JsonResult> AddClient(Client client)
+        {
+            return AddObjectToDb(client);
+        }
+
+        public IActionResult CreateAppointment()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public Task<JsonResult> CreateAppointment(Appointment appointment)
+        {
+            return AddObjectToDb(appointment);
+        }
+
+        public IActionResult AllAppointments()
+        {
+            return View();
+        }
+
+        //Method to Add any type of object to db
+        private async Task<JsonResult> AddObjectToDb(dynamic obj)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    client.CreatedDate = DateTime.Now;
-                    client.CreatedBy = "WASEEM ABBAS";
-                    ORM.Client.Add(client);
+                    obj.CreatedDate = DateTime.Now;
+                    obj.CreatedBy = "WASEEM ABBAS";
+                    ORM.Add(obj);
                     await ORM.SaveChangesAsync();
                     return Json(Constants.DB_CRUD_SUCCESS);
                 }
@@ -67,14 +90,5 @@ namespace DesignExperts.Controllers
             return Json(Constants.DB_CRUD_ERROR);
         }
 
-        public IActionResult CreateAppointment()
-        {
-            return View();
-        }
-
-        public IActionResult AllAppointments()
-        {
-            return View();
-        }
     }
 }

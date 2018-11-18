@@ -102,7 +102,7 @@
                         <div class="input-group">
                             <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Gender"><i class="zmdi zmdi-male-female"></i></span>
                             <div class="form-group">
-                                <select asp-for="Gender" asp-items="Html.GetEnumSelectList<Gender>()"
+                                <select asp-for="Gender" asp-items="Html.GetEnumSelectList<GenderTypes>()"
                                     class="select2  select2-hidden-accessible form-control" aria-hidden="true">
                                 </select>
                             </div>
@@ -132,36 +132,5 @@
 @section Scripts{
     <script src="~/Theme/vendors/bower_components/sweetalert2/dist/sweetalert2.min.js"></script>
     <script src="~/lib/jquery/jQuery-loader/jquery.loader.min.js"></script>
-
-    @*<script>
-
-        onBegin = function (res) {
-            $('#btn-save').attr('disabled', true);
-            $('body').loader('show');
-        }
-        onSuccess = function (res) {
-            $('#btn-save').attr('disabled', false);
-            $('body').loader('hide');
-
-            var titl, txt, typ;
-            if (res == "CRUD Success") {
-                titl = "Saved!";
-                txt = "New client saved successfully";
-                typ = "success";
-            } else {
-                titl = "Error!";
-                txt = "Error while processing your request";
-                typ = "warning";
-            }
-            swal({
-                title: titl,
-                text: txt,
-                type: typ,
-                buttonsStyling: false,
-                confirmButtonClass: 'btn btn-sm btn-light',
-                background: 'rgba(0, 0, 0, 0.96)'
-            });
-        }
-    </script>*@
 
 }

@@ -1,5 +1,6 @@
 ﻿<head>
-    
+    <link rel="stylesheet" href="~/Theme/vendors/bower_components/sweetalert2/dist/sweetalert2.min.css">
+    <link href="~/lib/jquery/jQuery-loader/jquery.loader.min.css" rel="stylesheet" />
 </head>
 
 @{
@@ -44,6 +45,7 @@
             <div class="calendar card"></div>
         </div>
         <div class="col-md-6">
+            @Html.AntiForgeryToken()
             <form asp-controller="Appointment" asp-action="CreateAppointment"
                   data-ajax="true" data-ajax-method="POST" data-ajax-begin="onBegin"
                   data-ajax-success="onSuccess" data-ajax-failure="onFailure">
@@ -95,6 +97,9 @@
     <script src="~/Theme/vendors/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
     <script src="~/Theme/vendors/bower_components/autosize/dist/autosize.min.js"></script>
     <script src="~/Theme/vendors/bower_components/flatpickr/dist/flatpickr.min.js"></script>
+
+    <script src="~/Theme/vendors/bower_components/sweetalert2/dist/sweetalert2.min.js"></script>
+    <script src="~/lib/jquery/jQuery-loader/jquery.loader.min.js"></script>
     <!-- Calendar Script -->
     <script>
         'use strict';

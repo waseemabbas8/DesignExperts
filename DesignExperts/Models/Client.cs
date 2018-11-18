@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DesignExperts.Models
 {
-    public enum Gender
+    public enum GenderTypes
     {
         Male,
         Female
@@ -34,7 +34,7 @@ namespace DesignExperts.Models
 
         public string Address { get; set; }
 
-        public Gender Gender { get; set; }
+        public int? Gender { get; set; }
 
         public DateTime? CreatedDate { get; set; }
         public string CreatedBy { get; set; }

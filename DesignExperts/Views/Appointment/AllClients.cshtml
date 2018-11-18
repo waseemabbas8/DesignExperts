@@ -3,6 +3,7 @@
     ViewData["Title"] = "AllClients";
 }
 @model IEnumerable<Client>;
+@using DesignExperts.Resources;
 
 
 <header class="content__title">
@@ -41,7 +42,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (Model.Count() != 0)
+                    @if (ViewBag.Message==Constants.DB_CONNECTION_ERROR)
+                    {
+                        <script>alert("error")</script>
+                    }
+                    else if (true)
                     {
                         foreach (Client client in Model)
                         {
