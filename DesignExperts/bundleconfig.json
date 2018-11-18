@@ -4,5 +4,17 @@
     "inputFiles": [
       "wwwroot/Theme/vendors/bower_components/jquery.unobtrusive/jquery.unobtrusive-ajax.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/site.min.min.js",
+    "inputFiles": [
+      "wwwroot/js/site.min.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/site.min.js",
+    "inputFiles": [
+      "wwwroot/js/site.js"
+    ]
   }
 ]

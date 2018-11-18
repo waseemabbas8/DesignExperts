@@ -1,10 +1,11 @@
 ﻿<head>
-    <link rel="stylesheet" href="~/Theme/vendors/bower_components/fullcalendar/dist/fullcalendar.min.css">
+    
 </head>
 
 @{
     ViewData["Title"] = "CreateClient";
 }
+@model Appointment
 
 <div class="content__inner">
 
@@ -43,7 +44,47 @@
             <div class="calendar card"></div>
         </div>
         <div class="col-md-6">
+            <form asp-controller="Appointment" asp-action="CreateAppointment"
+                  data-ajax="true" data-ajax-method="POST" data-ajax-begin="onBegin"
+                  data-ajax-success="onSuccess" data-ajax-failure="onFailure">
+                <div class="input-group">
+                    <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Client Name"><i class="zmdi zmdi-account"></i></span>
+                    <div class="form-group">
+                        <input type="text" asp-for="ClientId" class="form-control" placeholder="Name" maxlength="100">
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+                <br /><br />
+                <div class="input-group">
+                    <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Appointment Date"><i class="zmdi zmdi-calendar"></i></span>
+                    <div class="form-group">
+                        <input type="text" asp-for="AppointmentDate" id="appt-date" class="form-control date-picker" placeholder="Pick a date">
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+                <br /><br />
+                <div class="input-group">
+                    <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Start Time"><i class="zmdi zmdi-time"></i></span>
+                    <div class="form-group">
+                        <input type="text" asp-for="StartTime" id="appt-date" class="form-control time-picker" placeholder="Pick a start time">
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+                <br /><br />
+                <div class="input-group">
+                    <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="End Time"><i class="zmdi zmdi-time"></i></span>
+                    <div class="form-group">
+                        <input type="text" asp-for="EndTime" id="appt-date" class="form-control time-picker" placeholder="Pick an end time">
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+                <br /><br />
+                <div class="text-center">
+                    <button id="btn-save" type="submit" class="btn btn-light btn--icon-text"><i class="zmdi zmdi-save"></i> Create</button>
+                    <button type="button" class="btn btn-light btn--icon-text"><i class="zmdi zmdi-close"></i> Clear</button>
+                </div>
 
+            </form>
         </div>
     </div>
 
@@ -53,6 +94,7 @@
     <script src="~/Theme/vendors/bower_components/moment/min/moment.min.js"></script>
     <script src="~/Theme/vendors/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
     <script src="~/Theme/vendors/bower_components/autosize/dist/autosize.min.js"></script>
+    <script src="~/Theme/vendors/bower_components/flatpickr/dist/flatpickr.min.js"></script>
     <!-- Calendar Script -->
     <script>
         'use strict';
@@ -75,13 +117,13 @@
                 selectable: true,
                 selectHelper: true,
                 editable: true,
-                
+                //handling day click event
                 dayClick: function (date) {
                     var isoDate = moment(date).toISOString();
-                    $('#new-event').modal('show');
-                    $('.new-event__title').val('');
-                    $('.new-event__start').val(isoDate);
-                    $('.new-event__end').val(isoDate);
+                    var fp = $('#appt-date').flatpickr({
+                        dateFormat: 'd/m/Y',
+                        defaultDate: [isoDate]
+                    });
                 },
 
                 viewRender: function (view) {
