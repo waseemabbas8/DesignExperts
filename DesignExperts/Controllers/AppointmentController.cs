@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DesignExperts.Data;
 using DesignExperts.Models;
 using DesignExperts.Resources;
 using Microsoft.AspNetCore.Mvc;
@@ -49,8 +50,15 @@ namespace DesignExperts.Controllers
             return AddObjectToDb(client);
         }
 
+        [HttpGet]
+        public IActionResult ClientDetail(int id)
+        {
+            return View();
+        }
+
         public IActionResult CreateAppointment()
         {
+            ViewBag.ListOfClients = ORM.Client.ToList<Client>();
             return View();
         }
 

@@ -1,7 +1,347 @@
-﻿
+﻿@model Member
+
+@using DesignExperts.Resources;
 @{
     ViewData["Title"] = "AddMember";
 }
 
-<h2>AddMember</h2>
+<div class="content__inner">
+    <!--header section-->
+    <header class="content__title">
+        <h1>Manage Member</h1>
 
+        <div class="actions">
+            <a href="" class="actions__item zmdi zmdi-trending-up"></a>
+            <a href="" class="actions__item zmdi zmdi-check-all"></a>
+
+            <div class="dropdown actions__item">
+                <i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a asp-controller="HR" asp-action="AllMembers" class="dropdown-item">All Members</a>
+                    <a href="" class="dropdown-item">Refresh</a>
+                    <a href="" class="dropdown-item">Settings</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--Add Member form-->
+    <form asp-action="AddUpdateCustomer" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="card" ng-app="mainApp" ng-controller="materialCtrl">
+
+            <div class="card-body" style="padding: 0.2rem;">
+                <div class="tab-container">
+                    <ul class="nav nav-tabs nav-fill" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#itemdetailtab" role="tab">Customer Information</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#guarantorsinfo" role="tab">Guarantors Information</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#itemdiscountdetailtab" role="tab">Customer Extras</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#settings" role="tab">Customer Documents</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active fade show" id="itemdetailtab" role="tabpanel">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-lg-6">
+                                    <div class="card">
+                                        <div class="card-header"><h6>Personal Information </h6></div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-5 col-sm-5 col-lg-5">
+                                                    <div class="profile__img">
+                                                        <img src="@(Model!=null && !string.IsNullOrEmpty(Model.Image)?"/CustomerImages/"+@Model.Image:"/Theme/demo/img/contacts/user_empty.png")" id="ProfileImg" style="height:200px;width:200px;" alt="">
+                                                        <input name="Profile" type="file" id="Profile" style="display:none;" accept=".jpg,.jpeg,.png,.gif" />
+                                                        <input asp-for="Image" type="hidden" />
+                                                        <a onclick="return uploadimage();" href="" class="zmdi zmdi-camera profile__img__edit"></a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-7 col-sm-7 col-lg-7">
+                                                    <div class="form-group">
+                                                            <label asp-for="FirstName" class="control-label">First Name</label>
+                                                            <input asp-for="FirstName" required class="form-control" />
+                                                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                            <label asp-for="LastName" class="control-label">Last Name</label>
+                                                            <input asp-for="LastName" required class="form-control" />
+                                                            <span asp-validation-for="LastName" class="text-danger"></span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label asp-for="Cnic" class="control-label">CNIC</label>
+                                                        <input asp-for="Cnic" class="form-control" />
+                                                        <span asp-validation-for="Cnic" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-5 col-sm-5 col-lg-5">
+                                                    <div class="form-group">
+                                                        <label asp-for="Gender" class="control-label"></label>
+                                                        <select asp-for="Gender" asp-items="Html.GetEnumSelectList<GenderType>()" id="Gender" class="form-control select2"></select>
+                                                        <span asp-validation-for="Gender" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-7 col-sm-7 col-lg-7">
+                                                    <div class="form-group">
+                                                        <label asp-for="Dob" class="control-label"></label>
+                                                        <input asp-for="Dob" type="text" class="form-control date-picker" />
+                                                        <span asp-validation-for="Dob" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 col-lg-6">
+                                                    <div class="form-group">
+                                                            <label asp-for="MartialStatus" class="control-label">Martial Status</label>
+                                                            <select asp-for="MartialStatus" asp-items="Html.GetEnumSelectList<MartialStatus>()" id="mart-status" class="form-control select2"></select>
+                                                            <span asp-validation-for="MartialStatus" class="text-danger"></span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                            <label asp-for="Reference" class="control-label">Reference</label>
+                                                            <input asp-for="Reference" required class="form-control" />
+                                                            <span asp-validation-for="Reference" class="text-danger"></span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                            <label asp-for="Religion" class="control-label">Religion</label>
+                                                            <select asp-for="Religion" asp-items="Html.GetEnumSelectList<GenderType>()" id="religion" class="form-control select2"></select>
+                                                            <span asp-validation-for="Religion" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-lg-6">
+                                                    <div class="form-group">
+                                                        <label asp-for="Qualification" class="control-label">Qualification</label>
+                                                        <input asp-for="Qualification" required class="form-control" />
+                                                        <span asp-validation-for="Qualification" class="text-danger"></span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                            <label asp-for="Cast" class="control-label">Cast</label>
+                                                            <select asp-for="Cast" asp-items="Html.GetEnumSelectList<GenderType>()" id="cast" class="form-control select2"></select>
+                                                            <span asp-validation-for="Cast" class="text-danger"></span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="form-group">
+                                                            <label asp-for="BloodGroup" class="control-label">Blood Group</label>
+                                                            <select asp-for="BloodGroup" id="bld-group" class="form-control select2">
+                                                                <option value="0">O -ve</option>
+                                                                <option value="1">O +ve</option>
+                                                                <option value="2">A -ve</option>
+                                                                <option value="3">A +ve</option>
+                                                                <option value="4">B -ve</option>
+                                                                <option value="5">B +ve</option>
+                                                                <option value="6">AB -ve</option>
+                                                                <option value="7">AB +ve</option>
+                                                            </select>
+                                                            <span asp-validation-for="BloodGroup" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-lg-6">
+                                    <div class="card">
+                                        <div class="card-header"><h6>Employment Information</h6></div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 col-lg-6">
+                                                    <div class="form-group">
+                                                         <label asp-for="Type" class="control-label"></label>
+                                                         <select asp-for="Type" asp-items="Html.GetEnumSelectList<MemberType>()" id="m-type" class="form-control select2"></select>
+                                                         <span asp-validation-for="Type" class="text-danger"></span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label asp-for="Department" class="control-label"></label>
+                                                        <select asp-for="Department" asp-items="Html.GetEnumSelectList<MemberType>()" id="m-type" class="form-control select2"></select>
+                                                        <span asp-validation-for="Department" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-lg-6">
+                                                    <div class="form-group">
+                                                        <label asp-for="Designation" class="control-label"></label>
+                                                        <input asp-for="Designation" required class="form-control" />
+                                                        <span asp-validation-for="Designation" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 col-lg-6">
+                                                    <div class="form-group">
+                                                        <label asp-for="Country" class="control-label"></label>
+                                                        <input asp-for="Country" value="Pakistan" class="form-control" />
+                                                        <span asp-validation-for="Country" class="text-danger"></span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label asp-for="City" class="control-label"></label>
+                                                        <input asp-for="City" value="Sialkot" class="form-control" />
+                                                        <span asp-validation-for="City" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-lg-6">
+                                                    <div class="form-group">
+                                                        <label asp-for="State" class="control-label"></label>
+                                                        <input asp-for="State" value="Punjab" class="form-control" />
+                                                        <span asp-validation-for="State" class="text-danger"></span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label asp-for="PostCode" class="control-label"></label>
+                                                        <input asp-for="PostCode" value="39600" class="form-control" />
+                                                        <span asp-validation-for="PostCode" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="StreetAddress" class="control-label"></label>
+                                                <input type="text" asp-for="StreetAddress" class="form-control" placeholder="e.g Block No.2, Street #4, Iqbal Town">
+                                                <span asp-validation-for="StreetAddress" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header"><h6>Contact Information </h6></div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 col-lg-6">
+                                                    <div class="form-group">
+                                                        <label asp-for="Email" class="control-label"></label>
+                                                        <input asp-for="Email" class="form-control" />
+                                                        <span asp-validation-for="Email" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-lg-6">
+                                                    <div class="form-group">
+                                                        <label asp-for="MobileP" class="control-label"></label>
+                                                        <input asp-for="MobileP" required class="form-control" />
+                                                        <span asp-validation-for="MobileP" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 col-lg-6">
+                                                    <div class="form-group">
+                                                        <label asp-for="MobileS" class="control-label"></label>
+                                                        <input asp-for="MobileS" class="form-control" />
+                                                        <span asp-validation-for="MobileS" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 col-lg-6">
+                                                    <div class="form-group">
+                                                        <label asp-for="Country" class="control-label"></label>
+                                                        <input asp-for="Country" value="Pakistan" class="form-control" />
+                                                        <span asp-validation-for="Country" class="text-danger"></span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label asp-for="City" class="control-label"></label>
+                                                        <input asp-for="City" value="Sialkot" class="form-control" />
+                                                        <span asp-validation-for="City" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-lg-6">
+                                                    <div class="form-group">
+                                                        <label asp-for="State" class="control-label"></label>
+                                                        <input asp-for="State" value="Punjab" class="form-control" />
+                                                        <span asp-validation-for="State" class="text-danger"></span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label asp-for="PostCode" class="control-label"></label>
+                                                        <input asp-for="PostCode" value="39600" class="form-control" />
+                                                        <span asp-validation-for="PostCode" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="StreetAddress" class="control-label"></label>
+                                                <input type="text" asp-for="StreetAddress" class="form-control" placeholder="e.g Block No.2, Street #4, Iqbal Town">
+                                                <span asp-validation-for="StreetAddress" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="guarantorsinfo" role="tabpanel">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header"><h4>Guarantors Information</h4></div>
+                                        <div class="card-body">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-lg-12">
+                                    <div class="card main">
+                                        <div class="card-header"><h4>List Of Guarantors</h4></div>
+                                        <div class="card-body">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="itemdiscountdetailtab" role="tabpanel">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-lg-6">
+                                    <div class="card">
+                                        <div class="card-header"><h4>Extras</h4></div>
+                                        <div class="card-body">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-lg-6">
+                                    <div class="card main">
+                                        <div class="card-header"><h4>Item Extras</h4></div>
+                                        <div class="card-body">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="settings" role="tabpanel">
+                            <div class="card">
+                                <div class="card-body">
+                                    <input id="Documents" name="Documents" type="hidden" />
+                                    <h4 class="card-title">Drag and drop file upload</h4>
+                                    <div class="dropzone clsbox" id="mydropzone">
+
+                                    </div>
+                                    <div class="row" style="margin-top:10px;">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <td>Description</td>
+                                                    <td>Documents</td>
+                                                    <td>Actions</td>
+                                                </tr>
+                                            </thead>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-header text-center">
+                <div class="row">
+                    <button type="submit" class="btn btn-light btn-block btn-sm" onclick="SetData(this);"><i class="zmdi zmdi-save"></i> Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+
+    <script src="~/Theme/vendors/bower_components/flatpickr/dist/flatpickr.min.js"></script>
+}

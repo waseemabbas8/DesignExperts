@@ -4,11 +4,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DesignExperts.Models
 {
-    public enum GenderTypes
-    {
-        Male,
-        Female
-    }
 
     public partial class Client
     {

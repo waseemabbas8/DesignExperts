@@ -1,8 +1,9 @@
 ﻿using System;
+using DesignExperts.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace DesignExperts.Models
+namespace DesignExperts.Data
 {
     public partial class dbDesignExpertsContext : DbContext
     {

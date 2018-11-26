@@ -52,7 +52,8 @@
                 <div class="input-group">
                     <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Client Name"><i class="zmdi zmdi-account"></i></span>
                     <div class="form-group">
-                        <input type="text" asp-for="ClientId" class="form-control" placeholder="Client" maxlength="100">
+                        <select asp-for="ClientId" asp-items="@(new SelectList(@ViewBag.ListOfClients,"Id","Name"))"
+                                class="select2  select2-hidden-accessible form-control" aria-hidden="true"></select>
                         <i class="form-group__bar"></i>
                     </div>
                 </div>
@@ -69,18 +70,36 @@
                     <div class="input-group col-md-6">
                         <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Start Time"><i class="zmdi zmdi-time"></i></span>
                         <div class="form-group">
-                            <input type="text" asp-for="StartTime" id="appt-date" class="form-control time-picker" placeholder="Pick a start time">
+                            <input type="text" asp-for="StartTime" class="form-control time-picker" placeholder="Pick a start time">
                             <i class="form-group__bar"></i>
                         </div>
                     </div>
                     <div class="input-group col-md-6">
                         <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="End Time"><i class="zmdi zmdi-time"></i></span>
                         <div class="form-group">
-                            <input type="text" asp-for="EndTime" id="appt-date" class="form-control time-picker" placeholder="Pick an end time">
+                            <input type="text" asp-for="EndTime" class="form-control time-picker" placeholder="Pick an end time">
                             <i class="form-group__bar"></i>
                         </div>
                     </div>
                 </div>
+                <br /><br />
+                      <div class="row">
+                          <div class="input-group col-md-6">
+                              <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Client Name"><i class="zmdi zmdi-account-calendar"></i></span>
+                              <div class="form-group">
+                                  <input type="text" asp-for="Appointee" class="form-control" placeholder="Appointee">
+                                  <i class="form-group__bar"></i>
+                              </div>
+                          </div>
+                          <div class="input-group col-md-6">
+                              <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Client Name"><i class="zmdi zmdi-account-calendar"></i></span>
+                              <div class="form-group">
+                                  <input type="text" asp-for="AppointmentFee" class="form-control" placeholder="Appointee">
+                                  <i class="form-group__bar"></i>
+                              </div>
+                          </div>
+                      </div>
+                
                 <br /><br />
                 <div class="text-center">
                     <button id="btn-save" type="submit" class="btn btn-light btn--icon-text"><i class="zmdi zmdi-save"></i> Create</button>

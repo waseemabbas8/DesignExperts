@@ -453,4 +453,8 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\Members\" />
+  </ItemGroup>
+
 </Project>
