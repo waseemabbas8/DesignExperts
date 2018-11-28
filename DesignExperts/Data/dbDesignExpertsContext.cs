@@ -18,6 +18,7 @@ namespace DesignExperts.Data
 
         public virtual DbSet<Appointment> Appointment { get; set; }
         public virtual DbSet<Client> Client { get; set; }
+        public virtual DbSet<Member> Member { get; set; }
 
 //        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 //        {
