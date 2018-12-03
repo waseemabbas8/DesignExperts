@@ -85,16 +85,17 @@
                 <br /><br />
                       <div class="row">
                           <div class="input-group col-md-6">
-                              <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Client Name"><i class="zmdi zmdi-account-calendar"></i></span>
+                              <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Client Name"><i class="zmdi zmdi-account-circle"></i></span>
                               <div class="form-group">
-                                  <input type="text" asp-for="Appointee" class="form-control" placeholder="Appointee">
+                                  <select asp-for="Appointee" asp-items="@(new SelectList(@ViewBag.ListOfDirectors,"FirstName","FirstName"))"
+                                          class="select2  select2-hidden-accessible form-control" aria-hidden="true"></select>
                                   <i class="form-group__bar"></i>
                               </div>
                           </div>
                           <div class="input-group col-md-6">
-                              <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Client Name"><i class="zmdi zmdi-account-calendar"></i></span>
+                              <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Appointment Booking Charges"><i class="zmdi zmdi-money"></i></span>
                               <div class="form-group">
-                                  <input type="text" asp-for="AppointmentFee" class="form-control" placeholder="Appointee">
+                                  <input type="number" asp-for="AppointmentFee" class="form-control" placeholder="Booking Charges">
                                   <i class="form-group__bar"></i>
                               </div>
                           </div>
@@ -145,10 +146,11 @@
                 //handling day click event
                 dayClick: function (date) {
                     var isoDate = moment(date).toISOString();
-                    var fp = $('#appt-date').flatpickr({
-                        dateFormat: 'd/m/Y',
-                        defaultDate: [isoDate]
-                    });
+                    flatpickr("#appt-date", {}).setDate(isoDate);
+                    //var fp = $('#appt-date').flatpickr({
+                    //    dateFormat: 'd/m/Y',
+                    //    defaultDate: [isoDate]
+                    //});
                 },
 
                 viewRender: function (view) {

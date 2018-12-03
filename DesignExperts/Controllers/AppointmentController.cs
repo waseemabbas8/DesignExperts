@@ -58,6 +58,7 @@ namespace DesignExperts.Controllers
 
         public IActionResult CreateAppointment()
         {
+            ViewBag.ListOfDirectors = ORM.Member.Where(m=>m.Type.Equals((int)MemberType.Director)).ToList<Member>();
             ViewBag.ListOfClients = ORM.Client.ToList<Client>();
             return View();
         }
@@ -66,12 +67,13 @@ namespace DesignExperts.Controllers
         [ValidateAntiForgeryToken]
         public Task<JsonResult> CreateAppointment(Appointment appointment)
         {
+            appointment.Status = (int)AppointmentStatus.Booked;
             return AddObjectToDb(appointment);
         }
 
         public IActionResult AllAppointments()
         {
-            return View();
+            return View(ORM.Appointment.ToList<Appointment>());
         }
 
         //Method to Add any type of object to db

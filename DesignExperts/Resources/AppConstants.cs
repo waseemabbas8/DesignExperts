@@ -32,6 +32,11 @@ namespace DesignExperts.Resources
         Director, Employee, Internee
     }
 
+    public enum AppointmentStatus
+    {
+        Booked, Attended, DNA, Canceled
+    }
+
     public class AppConstants
     {
         

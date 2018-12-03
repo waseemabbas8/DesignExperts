@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DesignExperts.Data;
@@ -16,11 +17,6 @@ namespace DesignExperts.Controllers
             this.Db = db;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
         public IActionResult AddUpdateMember()
         {
             return View();
@@ -31,6 +27,37 @@ namespace DesignExperts.Controllers
         public Task<JsonResult> AddUpdateMember(Member member)
         {
             return AddObjectToDb(member);
+        }
+
+        public IActionResult AllMembers()
+        {
+            return View(Db.Member.ToList<Member>());
+        }
+
+        public string GetMembersList()
+        {
+            string Result = "";
+
+            IList<Member> members = Db.Member.ToList<Member>();
+
+            foreach (Member member in members)
+            {
+                Result += 
+                    "<div class='col-xl-2 col-lg-3 col-sm-4 col-6'>" +
+                        "<div class='contacts__item'>" +
+                            "<a href='' class='contacts__img'>" +
+                                "<img src='~/Theme/demo/img/contacts/1.jpg' alt=''>" +
+                            "</a>" +
+                            "<div class='contacts__info'>" +
+                                "<strong>Cathy Shelton</strong>" +
+                                "<small>cathy.shelton31 @example.com</small>" +
+                            "</div>" +
+                            "<button class='contacts__btn'>Following</button>" +
+                        "</div>" +
+                    "</div>";
+            }
+
+            return Result;
         }
 
         //Method to Add any type of object to db
