@@ -60,6 +60,16 @@ namespace DesignExperts.Controllers
             return Result;
         }
 
+        public Task<JsonResult> AddUpdateDepartment(Department department)
+        {
+            return AddObjectToDb(department);
+        }
+
+        public Task<JsonResult> AddUpdateGeneralTypes(GeneralType generalType)
+        {
+            return AddObjectToDb(generalType);
+        }
+
         //Method to Add any type of object to db
         private async Task<JsonResult> AddObjectToDb(dynamic obj)
         {

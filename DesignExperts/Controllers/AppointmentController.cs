@@ -76,6 +76,11 @@ namespace DesignExperts.Controllers
             return View(ORM.Appointment.ToList<Appointment>());
         }
 
+        public int GetTodayAppointments()
+        {
+            return ORM.Appointment.Where(m=>m.AppointmentDate.Equals(DateTime.Now.Date)).ToList<Appointment>().Count();
+        }
+
         //Method to Add any type of object to db
         private async Task<JsonResult> AddObjectToDb(dynamic obj)
         {

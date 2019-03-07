@@ -202,7 +202,7 @@
                                                 <div class="col-md-6 col-sm-6 col-lg-6">
                                                     <div class="form-group">
                                                         <label asp-for="MobileP" class="control-label"></label>
-                                                        <input asp-for="MobileP" required class="form-control input-mask" data-mask="0000-0000000" placeholder="eg: 0300-0000000" autocomplete="off" maxlength="11"/>
+                                                        <input asp-for="MobileP" required class="form-control input-mask" data-mask="0000-0000000" placeholder="eg: 0300-0000000" autocomplete="off" maxlength="11" />
                                                         <span asp-validation-for="MobileP" class="text-danger"></span>
                                                     </div>
                                                 </div>
@@ -211,7 +211,7 @@
                                                 <div class="col-md-6 col-sm-6 col-lg-6">
                                                     <div class="form-group">
                                                         <label asp-for="MobileS" class="control-label"></label>
-                                                        <input asp-for="MobileS" class="form-control input-mask" data-mask="0000-0000000" placeholder="eg: 0300-0000000" autocomplete="off" maxlength="11"/>
+                                                        <input asp-for="MobileS" class="form-control input-mask" data-mask="0000-0000000" placeholder="eg: 0300-0000000" autocomplete="off" maxlength="11" />
                                                         <span asp-validation-for="MobileS" class="text-danger"></span>
                                                     </div>
                                                 </div>
@@ -316,11 +316,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card-header text-center">
-                <div class="row">
-                    <button type="submit" class="btn btn-light btn-block btn-sm"><i class="zmdi zmdi-save"></i> Save</button>
-                </div>
-            </div>
+            <button type="submit" class="btn btn-light"><i class="zmdi zmdi-save"></i> Save</button>
         </div>
     </form>
 </div>
@@ -330,4 +326,16 @@
     <script src="~/Theme/vendors/bower_components/flatpickr/dist/flatpickr.min.js"></script>
     <script src="~/Theme/vendors/bower_components/sweetalert2/dist/sweetalert2.min.js"></script>
     <script src="~/lib/jquery/jQuery-loader/jquery.loader.min.js"></script>
+
+    <script>
+        // image uploading fun
+        function uploadimage() {
+            $("#Profile").trigger('click');
+            $("#Profile").change(function () {
+                $("#ProfileImg").fadeIn("fast").attr('src', URL.createObjectURL(event.target.files[0]));
+                //$(".imgtext").text("Change")
+            });
+            return false;
+        }
+    </script>
 }
