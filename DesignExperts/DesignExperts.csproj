@@ -8,6 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\**" />
+    <Content Remove="Views\**" />
+    <EmbeddedResource Remove="Views\**" />
+    <None Remove="Views\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\AppointmentController.cs" />
+    <Compile Remove="Controllers\HRController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="bundleconfig.json" />
   </ItemGroup>
 
@@ -96,6 +108,16 @@
 
   <ItemGroup>
     <None Include="bundleconfig.json" />
+    <None Include="Views\Home\AddUpdateAppointment.cshtml" />
+    <None Include="Views\Home\Index.cshtml" />
+    <None Include="Views\Home\Login.cshtml" />
+    <None Include="Views\Shared\Error.cshtml" />
+    <None Include="Views\Shared\_CookieConsentPartial.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Views\Shared\_LoginPartial.cshtml" />
+    <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <None Include="Views\_ViewImports.cshtml" />
+    <None Include="Views\_ViewStart.cshtml" />
     <None Include="wwwroot\Theme\vendors\bower_components\autosize\dist\autosize.min.js" />
     <None Include="wwwroot\Theme\vendors\bower_components\bootstrap-colorpicker\dist\css\src\less\colorpicker.less" />
     <None Include="wwwroot\Theme\vendors\bower_components\bootstrap-colorpicker\dist\js\bootstrap-colorpicker.min.js" />

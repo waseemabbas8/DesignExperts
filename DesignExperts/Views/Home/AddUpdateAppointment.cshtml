@@ -1,0 +1,392 @@
+﻿@model Appointment
+<head>
+    <link rel="stylesheet" href="~/Theme/vendors/bower_components/sweetalert2/dist/sweetalert2.min.css">
+    <link href="~/lib/jquery/jQuery-loader/jquery.loader.min.css" rel="stylesheet" />
+</head>
+
+@{
+    ViewData["Title"] = "AddUpdateAppointment";
+}
+
+
+<div class="content__inner">
+
+    <div class="row">
+        <div class="col-md-12">
+            <header class="content__title">
+                <h1>Setup New Appointment</h1>
+                <div class="actions">
+                    <div class="dropdown actions__item">
+                        <i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a asp-controller="Appointment" asp-action="AllAppointments" class="dropdown-item">View Setuped</a>
+                            <a href="" class="dropdown-item">Refresh</a>
+                            <a href="" class="dropdown-item">Settings</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <form action="/Home/AddUpdateAppointment" method="post" class="row">
+            <div class="card-demo col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Client Information</h4>
+                        <div class="input-group">
+                            <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Client Name">
+                                <i class="zmdi zmdi-account"></i>
+                            </span>
+                            <div class="form-group">
+                                <input type="text" class="form-control" asp-for="ClientName" placeholder="Enter Client Name...">
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                        <br /><br />
+                        <div class="row">
+                            <div class="input-group col-md-6">
+                                <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Mobile"><i class="zmdi-phone"></i></span>
+                                <div class="form-group">
+                                    <input type="number" class="form-control" asp-for="ClientMobile" placeholder="Mobile">
+                                    <i class="form-group__bar"></i>
+                                </div>
+                            </div>
+                            <div class="input-group col-md-6">
+                                <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Email"><i class="zmdi zmdi-email"></i></span>
+                                <div class="form-group">
+                                    <input type="text" class="form-control zmdi-email" placeholder="Email">
+                                    <i class="form-group__bar"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <br /><br />
+                        <div class="row">
+                            <div class="input-group col-md-12">
+                                <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Location"><i class="zmdi zmdi-my-location"></i></span>
+                                <div class="form-group">
+                                    <input type="number" asp-for="AppointmentFee" class="form-control" placeholder="Location">
+                                    <i class="form-group__bar"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-demo col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Project Details</h4>
+                        <div class="input-group">
+                            <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Client Name">
+                                <i class="zmdi zmdi-account"></i>
+                            </span>
+                            <div class="form-group">
+                                <div class="select">
+                                    <select class="form-control">
+                                        <option>Select Project Type</option>
+                                        <option>Option 1</option>
+                                        <option>Option 2</option>
+                                        <option>Option 3</option>
+                                        <option>Option 4</option>
+                                        <option>Option 5</option>
+                                    </select>
+                                </div>
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                        <br /><br />
+                        <div class="row">
+                            <div class="input-group col-md-12">
+                                <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Work Scope"><i class="zmdi-book"></i></span>
+                                <div class="form-group">
+                                    <div class="select">
+                                        <select class="form-control">
+                                            <option>Select Project Work Scope</option>
+                                            <option>Option 1</option>
+                                            <option>Option 2</option>
+                                            <option>Option 3</option>
+                                            <option>Option 4</option>
+                                            <option>Option 5</option>
+                                        </select>
+                                    </div>
+                                    <i class="form-group__bar"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <br /><br />
+                        <div class="row">
+                            <div class="input-group col-md-12">
+                                <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Location"><i class="zmdi zmdi-my-location"></i></span>
+                                <div class="form-group">
+                                    <input type="number" asp-for="AppointmentFee" class="form-control" placeholder="Location">
+                                    <i class="form-group__bar"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-demo col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Appointment Details</h4>
+                        <div class="input-group">
+                            <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Client Name">
+                                <i class="zmdi zmdi-account"></i>
+                            </span>
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Venue...">
+                                    <i class="form-group__bar"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <br /><br />
+                        <div class="row">
+                            <div class="input-group col-md-6">
+                                <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Work Scope"><i class="zmdi zmdi-time"></i></span>
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Appointment Date...">
+                                        <i class="form-group__bar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group col-md-6">
+                                <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Appointment Time..."><i class="zmdi zmdi-time"></i></span>
+                                <div class="form-group">
+                                    <input type="number" asp-for="AppointmentFee" class="form-control" placeholder="Appointment Time...">
+                                    <i class="form-group__bar"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-demo col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Fee Details</h4>
+                        <div class="input-group">
+                            <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Client Name">
+                                <i class="zmdi zmdi-account"></i>
+                            </span>
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Venue...">
+                                    <i class="form-group__bar"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <br /><br />
+                        <div class="row">
+                            <div class="input-group col-md-6">
+                                <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Work Scope"><i class="zmdi zmdi-time"></i></span>
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Appointment Date...">
+                                        <i class="form-group__bar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group col-md-6">
+                                <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Appointment Time..."><i class="zmdi zmdi-time"></i></span>
+                                <div class="form-group">
+                                    <input type="number" asp-for="AppointmentFee" class="form-control" placeholder="Location">
+                                    <i class="form-group__bar"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-light btn-block">Save or Update</button>
+            </div>
+        </form>
+    </div>
+
+
+
+</div>
+
+@section Scripts{
+    <script src="~/Theme/vendors/bower_components/moment/min/moment.min.js"></script>
+    <script src="~/Theme/vendors/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+    <script src="~/Theme/vendors/bower_components/autosize/dist/autosize.min.js"></script>
+    <script src="~/Theme/vendors/bower_components/flatpickr/dist/flatpickr.min.js"></script>
+
+    <script src="~/Theme/vendors/bower_components/sweetalert2/dist/sweetalert2.min.js"></script>
+    <script src="~/lib/jquery/jQuery-loader/jquery.loader.min.js"></script>
+    <!-- Calendar Script -->
+    <script>
+        'use strict';
+        $(document).ready(function () {
+            var date = new Date();
+            var m = date.getMonth();
+            var y = date.getFullYear();
+
+            $('.calendar').fullCalendar({
+                header: {
+                    right: '',
+                    center: '',
+                    left: ''
+                },
+                buttonIcons: {
+                    prev: 'calendar__prev',
+                    next: 'calendar__next'
+                },
+                theme: false,
+                selectable: true,
+                selectHelper: true,
+                editable: true,
+                //handling day click event
+                dayClick: function (date) {
+                    var isoDate = moment(date).toISOString();
+                    flatpickr("#appt-date", {}).setDate(isoDate);
+                    //var fp = $('#appt-date').flatpickr({
+                    //    dateFormat: 'd/m/Y',
+                    //    defaultDate: [isoDate]
+                    //});
+                },
+
+                viewRender: function (view) {
+                    var calendarDate = $('.calendar').fullCalendar('getDate');
+                    var calendarMonth = calendarDate.month();
+
+                    //Set title in page header
+                    $('.content__title--calendar > h1').html(view.title);
+                },
+
+                eventClick: function (event, element) {
+                    $('#edit-event').modal('show');
+                    $('.edit-event__id').val(event.id);
+                    $('.edit-event__title').val(event.title);
+                    $('.edit-event__description').val(event.description);
+                }
+            });
+
+
+            //Add new Event
+            $('body').on('click', '.new-event__add', function () {
+                var eventTitle = $('.new-event__title').val();
+
+                // Generate ID
+                var GenRandom = {
+                    Stored: [],
+                    Job: function () {
+                        var newId = Date.now().toString().substr(6); // or use any method that you want to achieve this string
+
+                        if (!this.Check(newId)) {
+                            this.Stored.push(newId);
+                            return newId;
+                        }
+                        return this.Job();
+                    },
+                    Check: function (id) {
+                        for (var i = 0; i < this.Stored.length; i++) {
+                            if (this.Stored[i] == id) return true;
+                        }
+                        return false;
+                    }
+                };
+
+                if (eventTitle != '') {
+                    $('.calendar').fullCalendar('renderEvent', {
+                        id: GenRandom.Job(),
+                        title: eventTitle,
+                        start: $('.new-event__start').val(),
+                        end: $('.new-event__end').val(),
+                        allDay: true,
+                        className: $('.event-tag input:checked').val()
+                    }, true);
+
+                    $('.new-event__form')[0].reset();
+                    $('.new-event__title').closest('.form-group').removeClass('has-danger');
+                    $('#new-event').modal('hide');
+                }
+                else {
+                    $('.new-event__title').closest('.form-group').addClass('has-danger');
+                    $('.new-event__title').focus();
+                }
+            });
+
+
+            //Update/Delete an Event
+            $('body').on('click', '[data-calendar]', function () {
+                var calendarAction = $(this).data('calendar');
+                var currentId = $('.edit-event__id').val();
+                var currentTitle = $('.edit-event__title').val();
+                var currentDesc = $('.edit-event__description').val();
+                var currentEvent = $('.calendar').fullCalendar('clientEvents', currentId);
+
+                //Update
+                if (calendarAction === 'update') {
+                    if (currentTitle != '') {
+                        currentEvent[0].title = currentTitle;
+                        currentEvent[0].description = currentDesc;
+
+                        $('.calendar').fullCalendar('updateEvent', currentEvent[0]);
+                        $('#edit-event').modal('hide');
+                    }
+                    else {
+                        $('.edit-event__title').closest('.form-group').addClass('has-error');
+                        $('.edit-event__title').focus();
+                    }
+                }
+
+                //Delete
+                if (calendarAction === 'delete') {
+                    $('#edit-event').modal('hide');
+                    setTimeout(function () {
+                        swal({
+                            title: 'Are you sure?',
+                            text: "You won't be able to revert this!",
+                            type: 'warning',
+                            showCancelButton: true,
+                            buttonsStyling: false,
+                            confirmButtonClass: 'btn btn-danger',
+                            confirmButtonText: 'Yes, delete it!',
+                            cancelButtonClass: 'btn btn-light',
+                            background: 'rgba(0,0,0,0.096)'
+                        }).then(function () {
+                            $('.calendar').fullCalendar('removeEvents', currentId);
+                            swal({
+                                title: 'Deleted!',
+                                text: 'Your list has been deleted.',
+                                type: 'success',
+                                buttonsStyling: false,
+                                cancelButtonClass: 'btn btn-light',
+                                background: 'rgba(0,0,0,0.096)'
+                            });
+                        })
+                    }, 200);
+                }
+            });
+
+
+            //Calendar views switch
+            $('body').on('click', '[data-calendar-view]', function (e) {
+                e.preventDefault();
+
+                $('[data-calendar-view]').removeClass('actions__item--active');
+                $(this).addClass('actions__item--active');
+                var calendarView = $(this).attr('data-calendar-view');
+                $('.calendar').fullCalendar('changeView', calendarView);
+            });
+
+
+            //Calendar Next
+            $('body').on('click', '.actions__calender-next', function (e) {
+                e.preventDefault();
+                $('.calendar').fullCalendar('next');
+            });
+
+
+            //Calendar Prev
+            $('body').on('click', '.actions__calender-prev', function (e) {
+                e.preventDefault();
+                $('.calendar').fullCalendar('prev');
+            });
+        });
+    </script>
+}
