@@ -8,26 +8,24 @@
     ViewData["Title"] = "AddUpdateAppointment";
 }
 
+<header class="content__title">
+    <h1>Setup New Appointment</h1>
+    <div class="actions">
+        <div class="dropdown actions__item">
+            <i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a asp-controller="Home" asp-action="ViewAppointment" class="dropdown-item">All Appointments</a>
+                <a href="" class="dropdown-item">Refresh</a>
+                <a href="" class="dropdown-item">Settings</a>
+            </div>
+        </div>
+    </div>
+</header>
 
 <div class="content__inner">
+    <form asp-controller="Home" asp-action="AddUpdateAppointment" method="post">
+        <div class="row">
 
-    <div class="row">
-        <div class="col-md-12">
-            <header class="content__title">
-                <h1>Setup New Appointment</h1>
-                <div class="actions">
-                    <div class="dropdown actions__item">
-                        <i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a asp-controller="Appointment" asp-action="AllAppointments" class="dropdown-item">View Setuped</a>
-                            <a href="" class="dropdown-item">Refresh</a>
-                            <a href="" class="dropdown-item">Settings</a>
-                        </div>
-                    </div>
-                </div>
-            </header>
-        </div>
-        <form action="/Home/AddUpdateAppointment" method="post" class="row">
             <div class="card-demo col-md-6">
                 <div class="card">
                     <div class="card-body">
@@ -37,6 +35,7 @@
                                 <i class="zmdi zmdi-account"></i>
                             </span>
                             <div class="form-group">
+                                <input type="hidden" asp-for="Id" />
                                 <input type="text" class="form-control" asp-for="ClientName" placeholder="Enter Client Name...">
                                 <i class="form-group__bar"></i>
                             </div>
@@ -53,7 +52,7 @@
                             <div class="input-group col-md-6">
                                 <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Email"><i class="zmdi zmdi-email"></i></span>
                                 <div class="form-group">
-                                    <input type="text" class="form-control zmdi-email" placeholder="Email">
+                                    <input type="text" asp-for="ClientEmail" class="form-control zmdi-email" placeholder="Email">
                                     <i class="form-group__bar"></i>
                                 </div>
                             </div>
@@ -63,7 +62,7 @@
                             <div class="input-group col-md-12">
                                 <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Location"><i class="zmdi zmdi-my-location"></i></span>
                                 <div class="form-group">
-                                    <input type="number" asp-for="AppointmentFee" class="form-control" placeholder="Location">
+                                    <input type="text" asp-for="ClientAddress" class="form-control" placeholder="Location">
                                     <i class="form-group__bar"></i>
                                 </div>
                             </div>
@@ -81,7 +80,7 @@
                             </span>
                             <div class="form-group">
                                 <div class="select">
-                                    <select class="form-control">
+                                    <select class="form-control" asp-for="ProjectType">
                                         <option>Select Project Type</option>
                                         <option>Option 1</option>
                                         <option>Option 2</option>
@@ -99,7 +98,7 @@
                                 <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Work Scope"><i class="zmdi-book"></i></span>
                                 <div class="form-group">
                                     <div class="select">
-                                        <select class="form-control">
+                                        <select class="form-control" asp-for="ProjectScope">
                                             <option>Select Project Work Scope</option>
                                             <option>Option 1</option>
                                             <option>Option 2</option>
@@ -117,7 +116,7 @@
                             <div class="input-group col-md-12">
                                 <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Location"><i class="zmdi zmdi-my-location"></i></span>
                                 <div class="form-group">
-                                    <input type="number" asp-for="AppointmentFee" class="form-control" placeholder="Location">
+                                    <input type="text" asp-for="ProjecctLocation" class="form-control" placeholder="Location">
                                     <i class="form-group__bar"></i>
                                 </div>
                             </div>
@@ -135,7 +134,7 @@
                             </span>
                             <div class="form-group">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Venue...">
+                                    <input asp-for="AppointmentVanue" type="text" class="form-control" placeholder="Venue...">
                                     <i class="form-group__bar"></i>
                                 </div>
                             </div>
@@ -146,7 +145,7 @@
                                 <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Work Scope"><i class="zmdi zmdi-time"></i></span>
                                 <div class="form-group">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Appointment Date...">
+                                        <input asp-for="AppointmentDate" type="text" class="form-control date-picker" placeholder="Appointment Date...">
                                         <i class="form-group__bar"></i>
                                     </div>
                                 </div>
@@ -154,56 +153,34 @@
                             <div class="input-group col-md-6">
                                 <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Appointment Time..."><i class="zmdi zmdi-time"></i></span>
                                 <div class="form-group">
-                                    <input type="number" asp-for="AppointmentFee" class="form-control" placeholder="Appointment Time...">
+                                    <input type="number" asp-for="AppointmentTime" class="form-control time-picker" placeholder="Appointment Time...">
                                     <i class="form-group__bar"></i>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card-demo col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Fee Details</h4>
+                        <br /><br />
                         <div class="input-group">
                             <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Client Name">
                                 <i class="zmdi zmdi-account"></i>
                             </span>
                             <div class="form-group">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Venue...">
-                                    <i class="form-group__bar"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <br /><br />
-                        <div class="row">
-                            <div class="input-group col-md-6">
-                                <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Work Scope"><i class="zmdi zmdi-time"></i></span>
-                                <div class="form-group">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Appointment Date...">
-                                        <i class="form-group__bar"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="input-group col-md-6">
-                                <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Appointment Time..."><i class="zmdi zmdi-time"></i></span>
-                                <div class="form-group">
-                                    <input type="number" asp-for="AppointmentFee" class="form-control" placeholder="Location">
+                                    <input asp-for="AppointmentFee" type="number" class="form-control" placeholder="Appiontment Fee">
                                     <i class="form-group__bar"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
+
             <div class="col-md-12">
                 <button type="submit" class="btn btn-light btn-block">Save or Update</button>
             </div>
-        </form>
-    </div>
+        </div>
+
+    </form>
 
 
 

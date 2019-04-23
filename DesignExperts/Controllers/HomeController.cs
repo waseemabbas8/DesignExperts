@@ -10,11 +10,11 @@ namespace DesignExperts.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly dbDesignExpertsContext ORM;
+        private readonly dbDesignExpertsContext db;
 
         public HomeController(dbDesignExpertsContext _ORM)
         {
-            this.ORM = _ORM;
+            this.db = _ORM;
         }
 
         public IActionResult Index()
@@ -32,7 +32,7 @@ namespace DesignExperts.Controllers
         [HttpPost]
         public IActionResult Login(ViewLogin viewLogin)
         {
-            User user = ORM.User.Where(m => m.UserName == viewLogin.UserName && m.Password == viewLogin.Password).FirstOrDefault();
+            User user = db.User.Where(m => m.UserName == viewLogin.UserName && m.Password == viewLogin.Password).FirstOrDefault();
             if (user != null)
             {
                 return RedirectToAction(nameof(HomeController.Index));
@@ -41,17 +41,44 @@ namespace DesignExperts.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddUpdateAppointment()
+        public IActionResult AddUpdateAppointment(int ID = 0)
         {
-            return View();
+            if (ID != 0)
+            {
+                return View(db.Appointment.Where(m => m.Id == ID).FirstOrDefault());
+            }
+            return View(new Appointment());
         }
 
         [HttpPost]
-        public IActionResult AddUpdateAppointment(Appointment appointment)
+        public async Task<IActionResult> AddUpdateAppointment(Appointment appointment)
+        {
+            if (appointment.IsNew)
+            {
+                await db.Appointment.AddAsync(appointment);
+            }
+            else
+            {
+                db.Appointment.Update(appointment);
+            }           
+            await db.SaveChangesAsync();
+            return RedirectToAction(nameof(HomeController.AddUpdateAppointment));
+        }
+
+        [HttpGet]
+        public IActionResult ViewAppointment()
+        {                       
+            return View(db.Appointment.ToList());
+        }
+
+
+
+
+        [HttpGet]
+        public IActionResult AddUpdateGeneralType()
         {
             return View();
         }
-
 
     }
 }

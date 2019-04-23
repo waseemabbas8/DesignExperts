@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DesignExperts
 {
@@ -11,7 +12,7 @@ namespace DesignExperts
         public string ClientName { get; set; }
         public string ClientMobile { get; set; }
         public string ClientEmail { get; set; }
-        public string ClientFrom { get; set; }
+        public string ClientAddress { get; set; }
         public string ProjectType { get; set; }
         public string ProjecctLocation { get; set; }
         public string ProjectScope { get; set; }
@@ -30,5 +31,17 @@ namespace DesignExperts
 
         public Appointment IdNavigation { get; set; }
         public Appointment InverseIdNavigation { get; set; }
+
+        [NotMapped]
+        public bool IsNew {
+            get
+            {
+                if (this.Id==0)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
     }
 }

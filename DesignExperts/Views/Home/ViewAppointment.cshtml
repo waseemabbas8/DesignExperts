@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Appointment>
+
+
+    <header class="content__title">
+        <h1>Manage Appointments</h1>
+
+        <div class="actions">
+            <a href="#" class="actions__item zmdi zmdi-trending-up"></a>
+            <a href="#" class="actions__item zmdi zmdi-check-all"></a>
+
+            <div class="dropdown actions__item">
+                <i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a asp-controller="Home" asp-action="AddUpdateAppointment" class="dropdown-item">New Appointment</a>
+                    <a href="" class="dropdown-item">Refresh</a>
+                    <a href="#" class="dropdown-item">Settings</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Search Appointment</h4>
+            <h6 class="card-subtitle">Search and View any appointment</h6>
+
+            <div class="table-responsive">
+                <table id="data-table" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Reference No</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Fee</th>
+                            <th>Client</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var appt in Model)
+                        {
+                            <tr>
+                                <td><a href="/Home/AddUpdateAppointment?ID=@appt.Id">001</a></td>
+                                <td>@appt.AppointmentDate</td>
+                                <td>@appt.AppointmentTime</td>
+                                <td>@appt.AppointmentFee</td>
+                                <td>@appt.ClientName</td>
+                                <td>@appt.Status</td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>

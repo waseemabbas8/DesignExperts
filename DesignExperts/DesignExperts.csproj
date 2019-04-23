@@ -4,7 +4,7 @@
     <TargetFramework>net461</TargetFramework>
     <DebugType>full</DebugType>
     <UserSecretsId>aspnet-DesignExperts-76F4FC8F-9613-4850-A45F-B6AB9ED1D907</UserSecretsId>
-    <TypeScriptToolsVersion>3.0</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>3.3</TypeScriptToolsVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -103,14 +103,16 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.4" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.1.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.5" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="bundleconfig.json" />
     <None Include="Views\Home\AddUpdateAppointment.cshtml" />
+    <None Include="Views\Home\AddUpdateGeneralType.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
     <None Include="Views\Home\Login.cshtml" />
+    <None Include="Views\Home\ViewAppointment.cshtml" />
     <None Include="Views\Shared\Error.cshtml" />
     <None Include="Views\Shared\_CookieConsentPartial.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />
