@@ -77,6 +77,7 @@ namespace DesignExperts.Controllers
         [HttpGet]
         public IActionResult AddUpdateGeneralType()
         {
+            ViewBag.GeneralTypes = db.GeneralType.ToList();
             return View();
         }
 

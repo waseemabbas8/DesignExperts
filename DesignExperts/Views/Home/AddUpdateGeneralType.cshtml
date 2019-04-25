@@ -1,4 +1,4 @@
-﻿@model GeneralType
+﻿
 <head>
     <link rel="stylesheet" href="~/Theme/vendors/bower_components/sweetalert2/dist/sweetalert2.min.css">
     <link href="~/lib/jquery/jQuery-loader/jquery.loader.min.css" rel="stylesheet" />
@@ -7,11 +7,67 @@
 @{
     ViewData["Title"] = "AddUpdateGeneralType";
 }
+@model GeneralType
+
+<header class="content__title">
+    <h1>Manage General Types</h1>
+</header>
 
 <div class="content__inner">
+    
+    <div class="row">
+            <div class="card-demo col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Add New Type</h4>
+
+                        <form asp-controller="Home" asp-action="AddUpdateAppointment" method="post">
+                            <div class="input-group">
+                                <span class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Type Name">
+                                    <i class="zmdi zmdi-account"></i>
+                                </span>
+                                <div class="form-group">
+                                    <input type="hidden" asp-for="Id" />
+                                    <input type="text" class="form-control" asp-for="Name" placeholder="Enter Type Name...">
+                                    <i class="form-group__bar"></i>
+                                </div>
+                            </div>
+                            <br /><br />
+                            <button type="submit" class="btn btn-success btn--icon-text"><i class="zmdi zmdi-save"></i> Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-demo col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">List of General Types</h4>
+                        <h6 class="card-subtitle">Search and View any Type</h6>
+
+                        <div class="table-responsive">
+                            <table id="data-table" class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var gType in ViewBag.GeneralTypes as List<GeneralType>)
+                                    {
+                                        <tr>
+                                            <td>@gType.Name</td>
+                                            <td><a class="btn btn-primary" href="/Home/AddUpdateGeneralType?ID=@gType.Id">Edit</a></td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
 
 </div>
-
-    @section Scripts{
-
-    }
