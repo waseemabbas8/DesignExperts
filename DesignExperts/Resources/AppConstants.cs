@@ -19,6 +19,7 @@ namespace DesignExperts.Resources
     {
         Religion,
         Cast,
+        Project,
 
     }
 

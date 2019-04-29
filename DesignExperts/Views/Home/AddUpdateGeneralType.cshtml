@@ -33,6 +33,11 @@
                                 </div>
                             </div>
                             <br /><br />
+                            <div class="select">
+                                <select class="form-control" asp-for="Category" asp-items="@Html.GetEnumSelectList<Category>()">
+                                </select>
+                            </div>
+                            <br/><br/>
                             <button type="submit" class="btn btn-success btn--icon-text"><i class="zmdi zmdi-save"></i> Save</button>
                         </form>
                     </div>
